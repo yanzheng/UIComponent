@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  UIComponentDemo
+
+  Created by zheng yan on 12-8-10.
+  Copyright (c) 2012年 anjuke. All rights reserved.
+*/
+
+"Release to refresh..." = "松开手指立即更新";
+"Pull down to refresh..." = "下拉更新";
+"Loading..." = "更新中...";
