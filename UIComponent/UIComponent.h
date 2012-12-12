@@ -15,19 +15,19 @@
 #import "RTPhoto.h"
 #import "IndexScrollController.h"
 #import "JWFolders.h"
-#import "SimplePingHelper.h"
 
 #import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
-
-#import "RTButtonSegmentControl.h"
-#import "APISwitchView.h"
 
 #import "WEPopoverContainerView.h"
 #import "WEPopoverController.h"
 
 #import "WebImageView.h"
 #import "CustomBadge.h"
+
+#import "RTPopupSheet.h"
+
+#import "AFKPageFlipper.h"
 
 // category
 #import "UIImage+Alpha.h"
