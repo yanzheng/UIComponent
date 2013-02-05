@@ -32,6 +32,9 @@
 #import "TPKeyboardAvoidingTableView.h"
 #import "TPKeyboardAvoidingScrollView.h"
 
+#import "ELCAlbumPickerController.h"
+#import "ELCImagePickerController.h"
+
 // category
 #import "UIImage+Alpha.h"
 #import "UIImage+Resize.h"
