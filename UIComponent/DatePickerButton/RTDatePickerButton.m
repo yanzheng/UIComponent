@@ -17,6 +17,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         _datePicker = [[UIDatePicker alloc] init];
+        [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+        
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         [self addSubview:_textField];    
         _textField.inputView = _datePicker; 
@@ -69,6 +71,10 @@
 
 - (void)cancelClicked:(id)sender {
     [_textField resignFirstResponder];
+}
+
+- (void)dateChanged:(id)sender {
+    [_delegate datePickerDateChanged:self.datePicker];
 }
 
 /*

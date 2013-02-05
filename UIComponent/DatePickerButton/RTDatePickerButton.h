@@ -11,6 +11,7 @@
 @protocol RTDatePickerButtonDelegate<NSObject>
 - (void)datePickerWillPopup;
 - (void)datePickerWillDismiss;
+- (void)datePickerDateChanged:(UIDatePicker *)datePicker;
 @end
 
 @interface RTDatePickerButton : UIButton {
