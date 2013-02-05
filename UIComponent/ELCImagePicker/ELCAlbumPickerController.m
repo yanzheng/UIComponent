@@ -16,10 +16,10 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (id)init {
-    self = [super initWithNibName:nil bundle:nil];
-    return self;
-}
+//- (id)init {
+//    self = [super initWithNibName:nil bundle:nil];
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,7 +127,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	ELCAssetTablePicker *picker = [[ELCAssetTablePicker alloc] initWithNibName:@"ELCAssetTablePicker" bundle:[NSBundle mainBundle]];
+	ELCAssetTablePicker *picker = [[ELCAssetTablePicker alloc] init];
 	picker.parent = self;
 
     // Move me    
