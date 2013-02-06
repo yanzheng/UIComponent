@@ -9,13 +9,13 @@
 #import "ELCAssetCell.h"
 #import "ELCAsset.h"
 #import "ELCAlbumPickerController.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ELCAssetTablePicker
 
 @synthesize parent;
-@synthesize selectedAssetsLabel;
 @synthesize assetGroup, elcAssets;
+@synthesize progressView;
 
 -(void)viewDidLoad {
         
@@ -28,21 +28,31 @@
 	
 	UIBarButtonItem *doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
 	[self.navigationItem setRightBarButtonItem:doneButtonItem];
-	[self.navigationItem setTitle:@"Loading..."];
+	[self.navigationItem setTitle:NSLocalizedString(@"Loading...", nil)];
+    
+    // disable done button when loading photos
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 
 	[self performSelectorInBackground:@selector(preparePhotos) withObject:nil];
     
     // Show partial while full list loads
 	[self.tableView performSelector:@selector(reloadData) withObject:nil afterDelay:.5];
+    
+    self.progressView = [[UIView alloc] initWithFrame:CGRectMake(self.navigationController.view.bounds.size.width/2 - 50, self.navigationController.view.bounds.size.height/2 - 50, 100, 100)];
+    self.progressView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8f];
+    self.progressView.layer.masksToBounds = YES;
+    self.progressView.layer.cornerRadius = 8.0f;
+    
+    UIActivityIndicatorView *activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+    [self.progressView addSubview:activityIndicator];
+    activityIndicator.frame = CGRectMake(30, 30, 40, 40);
+    [activityIndicator startAnimating];
 }
 
 -(void)preparePhotos {
-    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	
-    NSLog(@"enumerating photos");
-    [self.assetGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) 
+    [self.assetGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
      {         
          if(result == nil) 
          {
@@ -52,29 +62,34 @@
          ELCAsset *elcAsset = [[[ELCAsset alloc] initWithAsset:result] autorelease];
          [elcAsset setParent:self];
          [self.elcAssets addObject:elcAsset];
-     }];    
-    NSLog(@"done enumerating photos");
-	
+     }];
+    
+    // enable done button when load finish
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
 	[self.tableView reloadData];
-	[self.navigationItem setTitle:@"Pick Photos"];
+	[self.navigationItem setTitle:NSLocalizedString(@"Pick Photos", nil)];
     
     [pool release];
-
 }
 
 - (void) doneAction:(id)sender {
-	
-	NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
-	    
-	for(ELCAsset *elcAsset in self.elcAssets) 
-    {		
-		if([elcAsset selected]) {
-			
-			[selectedAssetsImages addObject:[elcAsset asset]];
-		}
-	}
-        
+    [self.navigationController.view addSubview:self.progressView];
+    [self performSelector:@selector(handlePhotos) withObject:nil afterDelay:0];
+}
+
+- (void)handlePhotos {
+    NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
+    for(ELCAsset *elcAsset in self.elcAssets)
+    {
+        if([elcAsset selected]) {
+            
+            [selectedAssetsImages addObject:[elcAsset asset]];
+        }
+    }
+    
     [(ELCAlbumPickerController*)self.parent selectedAssets:selectedAssetsImages];
+    [self.progressView removeFromSuperview];    
 }
 
 #pragma mark UITableViewDataSource Delegate Methods
@@ -170,8 +185,8 @@
 - (void)dealloc 
 {
     [elcAssets release];
-    [selectedAssetsLabel release];
-    [super dealloc];    
+    self.progressView = nil;
+    [super dealloc];
 }
 
 @end

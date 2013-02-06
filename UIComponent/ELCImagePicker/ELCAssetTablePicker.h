@@ -11,19 +11,17 @@
 @interface ELCAssetTablePicker : UITableViewController
 {
 	ALAssetsGroup *assetGroup;
-	
 	NSMutableArray *elcAssets;
 	int selectedAssets;
 	
-	id parent;
-	
+	id parent;	
 	NSOperationQueue *queue;
 }
 
 @property (nonatomic, assign) id parent;
 @property (nonatomic, assign) ALAssetsGroup *assetGroup;
 @property (nonatomic, retain) NSMutableArray *elcAssets;
-@property (nonatomic, retain) IBOutlet UILabel *selectedAssetsLabel;
+@property (nonatomic, retain) UIView *progressView;
 
 -(int)totalSelectedAssets;
 -(void)preparePhotos;
