@@ -35,6 +35,8 @@
 #import "ELCAlbumPickerController.h"
 #import "ELCImagePickerController.h"
 
+#import "NumberKeypadDecimalPoint.h"
+
 // category
 #import "UIImage+Alpha.h"
 #import "UIImage+Resize.h"

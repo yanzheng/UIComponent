@@ -104,6 +104,8 @@
 		57B0C4E716C0ECA4003B2AA9 /* ELCImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 57B0C4DA16C0ECA3003B2AA9 /* ELCImagePickerController.h */; };
 		57B0C4E816C0ECA4003B2AA9 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B0C4DB16C0ECA3003B2AA9 /* ELCImagePickerController.m */; };
 		57E39326159849C100F0D0FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E39325159849C100F0D0FB /* Foundation.framework */; };
+		ABE6D0D616C3DDB100448EFD /* NumberKeypadDecimalPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = ABE6D0D416C3DDB100448EFD /* NumberKeypadDecimalPoint.h */; };
+		ABE6D0D716C3DDB100448EFD /* NumberKeypadDecimalPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6D0D516C3DDB100448EFD /* NumberKeypadDecimalPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,6 +217,8 @@
 		57E39325159849C100F0D0FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		57E39329159849C100F0D0FB /* UIComponent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIComponent-Prefix.pch"; sourceTree = "<group>"; };
 		57E3932A159849C100F0D0FB /* UIComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIComponent.h; sourceTree = "<group>"; };
+		ABE6D0D416C3DDB100448EFD /* NumberKeypadDecimalPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberKeypadDecimalPoint.h; sourceTree = "<group>"; };
+		ABE6D0D516C3DDB100448EFD /* NumberKeypadDecimalPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberKeypadDecimalPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +243,7 @@
 		5787C90415AABDBA001DC499 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				ABE6D0D316C3DDB100448EFD /* DecimalPointNumberPad */,
 				57B0C4CE16C0ECA3003B2AA9 /* ELCImagePicker */,
 				57A20F8B16784FF900FADD75 /* KeyboardAvoid */,
 				57A20F9016784FF900FADD75 /* TextViewPlaceHolder */,
@@ -559,6 +564,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		ABE6D0D316C3DDB100448EFD /* DecimalPointNumberPad */ = {
+			isa = PBXGroup;
+			children = (
+				ABE6D0D416C3DDB100448EFD /* NumberKeypadDecimalPoint.h */,
+				ABE6D0D516C3DDB100448EFD /* NumberKeypadDecimalPoint.m */,
+			);
+			path = DecimalPointNumberPad;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -616,6 +630,7 @@
 				57B0C4E316C0ECA4003B2AA9 /* ELCAssetCell.h in Headers */,
 				57B0C4E516C0ECA4003B2AA9 /* ELCAssetTablePicker.h in Headers */,
 				57B0C4E716C0ECA4003B2AA9 /* ELCImagePickerController.h in Headers */,
+				ABE6D0D616C3DDB100448EFD /* NumberKeypadDecimalPoint.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +731,7 @@
 				57B0C4E416C0ECA4003B2AA9 /* ELCAssetCell.m in Sources */,
 				57B0C4E616C0ECA4003B2AA9 /* ELCAssetTablePicker.m in Sources */,
 				57B0C4E816C0ECA4003B2AA9 /* ELCImagePickerController.m in Sources */,
+				ABE6D0D716C3DDB100448EFD /* NumberKeypadDecimalPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
