@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self.navigationItem setTitle:NSLocalizedString(@"Loading...", nil)];
+	[self.navigationItem setTitle:NSLocalizedString(@"Albums", nil)];
 
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.parent action:@selector(cancelImagePicker)];
 	[self.navigationItem setRightBarButtonItem:cancelButton];
@@ -75,9 +75,7 @@
 }
 
 -(void)reloadTableView {
-	
 	[self.tableView reloadData];
-	[self.navigationItem setTitle:NSLocalizedString(@"Albums", nil)];
 }
 
 -(void)selectedAssets:(NSArray*)_assets {
@@ -129,6 +127,7 @@
 	
 	ELCAssetTablePicker *picker = [[ELCAssetTablePicker alloc] init];
 	picker.parent = self;
+    picker.excludedAssetURLList = self.excludedAssetURLList;
 
     // Move me    
     picker.assetGroup = [assetGroups objectAtIndex:indexPath.row];
@@ -160,7 +159,8 @@
 
 
 - (void)dealloc 
-{	
+{
+    self.excludedAssetURLList = nil;
     [assetGroups release];
     [library release];
     [super dealloc];

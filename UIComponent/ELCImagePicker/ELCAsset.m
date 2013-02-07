@@ -12,6 +12,7 @@
 
 @synthesize asset;
 @synthesize parent;
+@synthesize masked = _masked;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -44,6 +45,8 @@
 }
 
 -(void)toggleSelection {
+    if (self.masked)
+        return;
     
 	overlayView.hidden = !overlayView.hidden;
     
@@ -58,16 +61,31 @@
 }
 
 -(BOOL)selected {
-	
+    if (self.masked)
+        return NO;
+    
 	return !overlayView.hidden;
 }
 
 -(void)setSelected:(BOOL)_selected {
+    if (self.masked)
+        return;
     
 	[overlayView setHidden:!_selected];
 }
 
-- (void)dealloc 
+- (void)setMasked:(BOOL)masked {
+    _masked = masked;
+    if (_masked) {
+        UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
+        maskView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:.6];
+        [self addSubview:maskView];
+    } else {
+        
+    }
+}
+
+- (void)dealloc
 {    
     self.asset = nil;
 	[overlayView release];

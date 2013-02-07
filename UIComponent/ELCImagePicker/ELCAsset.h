@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) ALAsset *asset;
 @property (nonatomic, assign) id parent;
+@property (nonatomic, assign) BOOL masked;
 
 -(id)initWithAsset:(ALAsset*)_asset;
 -(BOOL)selected;

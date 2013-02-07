@@ -16,6 +16,7 @@
 @synthesize parent;
 @synthesize assetGroup, elcAssets;
 @synthesize progressView;
+@synthesize excludedAssetURLList;
 
 -(void)viewDidLoad {
         
@@ -28,7 +29,7 @@
 	
 	UIBarButtonItem *doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
 	[self.navigationItem setRightBarButtonItem:doneButtonItem];
-	[self.navigationItem setTitle:NSLocalizedString(@"Loading...", nil)];
+	[self.navigationItem setTitle:NSLocalizedString(@"Pick Photos", nil)];
     
     // disable done button when loading photos
     self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -60,6 +61,9 @@
          }
          
          ELCAsset *elcAsset = [[[ELCAsset alloc] initWithAsset:result] autorelease];
+         if ([self.excludedAssetURLList containsObject:elcAsset.asset.defaultRepresentation.url])
+             [elcAsset setMasked:YES];
+         
          [elcAsset setParent:self];
          [self.elcAssets addObject:elcAsset];
      }];
@@ -67,13 +71,12 @@
     // enable done button when load finish
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
-	[self.tableView reloadData];
-	[self.navigationItem setTitle:NSLocalizedString(@"Pick Photos", nil)];
+	[self.tableView reloadData];    
     
     [pool release];
 }
 
-- (void) doneAction:(id)sender {
+- (void)doneAction:(id)sender {
     [self.navigationController.view addSubview:self.progressView];
     [self performSelector:@selector(handlePhotos) withObject:nil afterDelay:0];
 }
@@ -184,8 +187,10 @@
 
 - (void)dealloc 
 {
-    [elcAssets release];
     self.progressView = nil;
+    self.excludedAssetURLList = nil;
+    
+    [elcAssets release];
     [super dealloc];
 }
 

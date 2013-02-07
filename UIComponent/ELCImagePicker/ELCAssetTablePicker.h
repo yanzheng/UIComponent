@@ -23,6 +23,8 @@
 @property (nonatomic, retain) NSMutableArray *elcAssets;
 @property (nonatomic, retain) UIView *progressView;
 
+@property (nonatomic, retain) NSArray *excludedAssetURLList;
+
 -(int)totalSelectedAssets;
 -(void)preparePhotos;
 
