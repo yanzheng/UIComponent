@@ -9,10 +9,10 @@
 #import "RTPopupSheet.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define POPUP_BUTTON_HEIGHT 44
-#define POPUP_BUTTON_WIDTH 160
-#define POPUP_WIDTH_GAP 10
-#define POPUP_HEIGHT_GAP 10
+#define POPUP_BUTTON_HEIGHT 40
+#define POPUP_BUTTON_WIDTH 150
+#define POPUP_WIDTH_GAP 15
+#define POPUP_HEIGHT_GAP 12
 
 @implementation RTPopupSheet
 @synthesize delegate = _delegate;
@@ -52,11 +52,27 @@
     
     int i = 0;
     for (NSString *title in self.titles) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(POPUP_WIDTH_GAP, POPUP_BUTTON_HEIGHT*i+POPUP_HEIGHT_GAP*(i+1), POPUP_BUTTON_WIDTH, POPUP_BUTTON_HEIGHT);
         [button setTitle:title forState:UIControlStateNormal];
         button.tag = i;
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor colorWithRed:250.0/255 green:240.0/255 blue:210.0/255 alpha:1.0];
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.borderWidth = 0.5f;
+        button.layer.cornerRadius = 5.0f;
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        CGRect rect = button.bounds;
+        UIGraphicsBeginImageContext(rect.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [[UIColor grayColor] CGColor]);
+        CGContextFillRect(context, rect);
+        UIImage *hightlightImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [button setBackgroundImage:hightlightImage forState:UIControlStateHighlighted];
+        
         [self addSubview:button];
         i++;
     }
