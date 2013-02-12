@@ -15,7 +15,7 @@
 
 @synthesize parent;
 @synthesize assetGroup, elcAssets;
-@synthesize progressView;
+@synthesize progressHUD;
 @synthesize excludedAssetURLList;
 
 -(void)viewDidLoad {
@@ -39,15 +39,12 @@
     // Show partial while full list loads
 	[self.tableView performSelector:@selector(reloadData) withObject:nil afterDelay:.5];
     
-    self.progressView = [[UIView alloc] initWithFrame:CGRectMake(self.navigationController.view.bounds.size.width/2 - 50, self.navigationController.view.bounds.size.height/2 - 50, 100, 100)];
-    self.progressView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8f];
-    self.progressView.layer.masksToBounds = YES;
-    self.progressView.layer.cornerRadius = 8.0f;
-    
-    UIActivityIndicatorView *activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
-    [self.progressView addSubview:activityIndicator];
-    activityIndicator.frame = CGRectMake(30, 30, 40, 40);
-    [activityIndicator startAnimating];
+    if (!self.progressHUD) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD.minSize = CGSizeMake(120, 120);
+        self.progressHUD.minShowTime = 1;
+        [self.view addSubview:self.progressHUD];
+    }
 }
 
 -(void)preparePhotos {
@@ -77,7 +74,10 @@
 }
 
 - (void)doneAction:(id)sender {
-    [self.navigationController.view addSubview:self.progressView];
+    self.progressHUD.labelText = NSLocalizedString(@"Loading...", nil);
+    self.progressHUD.mode = MBProgressHUDModeIndeterminate;
+    [self.progressHUD show:YES];
+
     [self performSelector:@selector(handlePhotos) withObject:nil afterDelay:0];
 }
 
@@ -92,7 +92,6 @@
     }
     
     [(ELCAlbumPickerController*)self.parent selectedAssets:selectedAssetsImages];
-    [self.progressView removeFromSuperview];    
 }
 
 #pragma mark UITableViewDataSource Delegate Methods
@@ -187,7 +186,7 @@
 
 - (void)dealloc 
 {
-    self.progressView = nil;
+    self.progressHUD = nil;
     self.excludedAssetURLList = nil;
     
     [elcAssets release];

@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MBProgressHUD.h"
 
 @interface ELCAssetTablePicker : UITableViewController
 {
@@ -21,7 +22,7 @@
 @property (nonatomic, assign) id parent;
 @property (nonatomic, assign) ALAssetsGroup *assetGroup;
 @property (nonatomic, retain) NSMutableArray *elcAssets;
-@property (nonatomic, retain) UIView *progressView;
+@property (nonatomic, retain) MBProgressHUD *progressHUD;
 
 @property (nonatomic, retain) NSArray *excludedAssetURLList;
 

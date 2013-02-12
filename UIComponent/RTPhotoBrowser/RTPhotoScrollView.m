@@ -84,6 +84,10 @@
         _photos = [photos retain];
     }
     
+    [self.cachedPages removeAllObjects];
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
+    }
     _pageControl.numberOfPages = _photos.count;
     self.cachedPages = [NSMutableSet set];
 }
@@ -101,6 +105,11 @@
     for (id url in _photoUrls) {
         RTPhoto *photo = [RTPhoto photoWithURL:[NSURL URLWithString:(NSString *)url]];
         [photoArray addObject:photo];
+    }
+    
+    [self.cachedPages removeAllObjects];
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
     }
     
     [self setPhotos:photoArray];

@@ -18,13 +18,9 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
 // Private
-@interface MWPhotoBrowser () {	
-    NSUInteger _currentPageIndex;
-    
+@interface MWPhotoBrowser () {	    
 	// Navigation & controls
 	NSTimer *_controlVisibilityTimer;
-	UIBarButtonItem *_previousButton, *_nextButton, *_actionButton, *_deleteButton;
-    UIActionSheet *_actionsSheet;
     MBProgressHUD *_progressHUD;
 
     // Appearance
@@ -45,7 +41,6 @@
 @property (nonatomic, retain) UIColor *previousNavBarTintColor;
 @property (nonatomic, retain) UIBarButtonItem *previousViewControllerBackButton;
 @property (nonatomic, retain) UIImage *navigationBarBackgroundImageDefault, *navigationBarBackgroundImageLandscapePhone;
-@property (nonatomic, retain) UIActionSheet *actionsSheet;
 @property (nonatomic, retain) MBProgressHUD *progressHUD;
 
 // Private Methods
@@ -86,7 +81,6 @@
 
 // MWPhotoBrowser
 @implementation MWPhotoBrowser
-@synthesize delegate = _delegate;
 @synthesize toolbar = _toolbar;
 @synthesize customizeToolBar = _customizeToolBar;
 
@@ -94,7 +88,7 @@
 @synthesize previousNavBarTintColor = _previousNavBarTintColor;
 @synthesize navigationBarBackgroundImageDefault = _navigationBarBackgroundImageDefault,
 navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandscapePhone;
-@synthesize displayActionButton = _displayActionButton, actionsSheet = _actionsSheet, progressHUD = _progressHUD;
+@synthesize displayActionButton = _displayActionButton, progressHUD = _progressHUD;
 @synthesize previousViewControllerBackButton = _previousViewControllerBackButton;
 
 @synthesize photoUrls = _photoUrls;
@@ -162,31 +156,29 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)viewDidLoad {
 	// View
 	self.view.backgroundColor = [UIColor blackColor];
-	
-	// Setup paging scrolling view
-	CGRect pagingScrollViewFrame = self.view.bounds;
-	_pagingScrollView = [[RTPhotoScrollView alloc] initWithFrame:pagingScrollViewFrame];
-	_pagingScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	_pagingScrollView.backgroundColor = [UIColor blackColor];
-    _pagingScrollView.zoomEnabled = YES;
-    _pagingScrollView.viewContentMode = UIViewContentModeScaleAspectFit;
-    _pagingScrollView.pageControl.hidden = YES;
-    _pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
-    _pagingScrollView.tapDelegate = self;
-    _pagingScrollView.padding = self.padding;
-    _pagingScrollView.nextCacheCount = 3;
-    _pagingScrollView.preCacheCount = 3;
     
-    [self initPhotos];
-	[self.view addSubview:_pagingScrollView];
-	
+    // Setup paging scrolling view
+	CGRect pagingScrollViewFrame = self.view.bounds;
+	self.pagingScrollView = [[RTPhotoScrollView alloc] initWithFrame:pagingScrollViewFrame];
+	self.pagingScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.pagingScrollView.backgroundColor = [UIColor blackColor];
+    self.pagingScrollView.zoomEnabled = YES;
+    self.pagingScrollView.viewContentMode = UIViewContentModeScaleAspectFit;
+    self.pagingScrollView.pageControl.hidden = YES;
+    self.pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
+    self.pagingScrollView.tapDelegate = self;
+    self.pagingScrollView.padding = self.padding;
+    self.pagingScrollView.nextCacheCount = 3;
+    self.pagingScrollView.preCacheCount = 3;
+	[self.view addSubview:self.pagingScrollView];
+    
     
     // Toolbar Items
     _previousButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIBarButtonItemArrowLeft.png"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
     _nextButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIBarButtonItemArrowRight.png"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
     _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
     _deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(trashButtonPressed:)];
-
+    
     // Toolbar
     _toolbar = [[UIToolbar alloc] initWithFrame:[self frameForToolbarAtOrientation:self.interfaceOrientation]];
     if (!self.customizeToolBar) {
@@ -205,7 +197,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         [items addObject:flexSpace];
         if (numberOfPhotos > 1)
             [items addObject:_nextButton];
-
+        
         [items addObject:flexSpace];
         
         [_toolbar setItems:items];
@@ -219,12 +211,13 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     }
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-        
+    
     [self initCaptionView];
     [self performLayout];
-
+    
+    [self initPhotos];
 	// Super
-    [super viewDidLoad];	
+    [super viewDidLoad];
 }
 
 // init caption view
@@ -270,6 +263,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
             i++;
         }
     }
+
     [self.pagingScrollView setPhotos:photoArray];
 }
 
@@ -387,13 +381,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     _viewIsActive = YES;
 }
 
-- (NSUInteger)rtSupportedInterfaceOrientations {
+- (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 
 - (BOOL)shouldAutorotate {
     return YES;
 }
+
 
 #pragma mark - Nav Bar Appearance
 
@@ -545,13 +540,10 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 }
 
 - (void)jumpToPageAtIndex:(NSUInteger)index {
+    [self cancelControlHiding];
 	[_pagingScrollView showAtIndex:index];
-//    _currentPageIndex = index;
     return;
 }
-
-- (void)gotoPreviousPage { [self jumpToPageAtIndex:_currentPageIndex-1]; }
-- (void)gotoNextPage { [self jumpToPageAtIndex:_currentPageIndex+1]; }
 
 #pragma mark - Control Hiding / Showing
 
@@ -712,5 +704,32 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)didPhotoLoaded:(id)imageView atIndex:(NSUInteger)index {
     
 }
+
+#pragma mark - ToolBar Actions:
+- (void)actionButtonPressed:(id)sender {
+    
+}
+
+- (void)trashButtonPressed:(id)sender {
+    int startIndex = _currentPageIndex;
+    if (self.photoPaths) {
+        [self.photoPaths removeObjectAtIndex:_currentPageIndex];
+        if (self.photoPaths.count <= _currentPageIndex)
+            startIndex = self.photoPaths.count-1;
+    } else if (self.photoUrls) {
+        [self.photoUrls removeObjectAtIndex:_currentPageIndex];
+        if (self.photoUrls.count <= _currentPageIndex)
+            startIndex = self.photoUrls.count-1;
+    }
+    
+    if (startIndex < 0)
+        return;
+
+    [self initPhotos];
+    [self showAtIndex:startIndex];
+}
+
+- (void)gotoPreviousPage { [self jumpToPageAtIndex:_currentPageIndex-1]; }
+- (void)gotoNextPage { [self jumpToPageAtIndex:_currentPageIndex+1]; }
 
 @end

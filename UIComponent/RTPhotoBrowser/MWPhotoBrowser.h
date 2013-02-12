@@ -10,24 +10,23 @@
 #import <MessageUI/MessageUI.h>
 #import "RTPhotoScrollView.h"
 
-@protocol MWPhotoBrowserDelegate <NSObject>
-- (void)photoDidRemoved:(NSUInteger)index;
-- (void)photoSetDefault:(NSUInteger)index;
-@end
-
 
 @interface MWPhotoBrowser : UIViewController <RTPhotoScrollViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+    NSUInteger _currentPageIndex;
+
     UIView *_captionView;
     UILabel *_captionLabel;
+    UIBarButtonItem *_actionButton, *_deleteButton;
+    UIBarButtonItem *_previousButton, *_nextButton;
 }
 
-// flag
+// customize toolbar
 @property (nonatomic, assign) BOOL customizeToolBar;
 @property (nonatomic, retain) UIToolbar *toolbar;
 
 // Properties
 @property (nonatomic) BOOL displayActionButton;
-@property (nonatomic, assign) id<MWPhotoBrowserDelegate> delegate;
+
 // Init
 @property (nonatomic, retain) NSMutableArray *photoPaths;
 @property (nonatomic, retain) NSMutableArray *photoUrls;
@@ -37,9 +36,12 @@
 
 @property (nonatomic, assign) CGFloat padding;
 
+- (NSUInteger)numberOfPhotos;
 - (void)hideControlsAfterDelay;
-
 - (void)showAtIndex:(NSInteger)index;
+
+- (void)actionButtonPressed:(id)sender;
+- (void)trashButtonPressed:(id)sender;
 
 @end
 
