@@ -242,7 +242,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     _captionLabel.shadowOffset = CGSizeMake(1, 1);
     _captionLabel.font = [UIFont systemFontOfSize:17];
     [_captionView addSubview:_captionLabel];    
-//    [self.view addSubview:_captionView];
+    [self.view addSubview:_captionView];
 }
 
 - (void)initPhotos {
@@ -625,8 +625,9 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 
 #pragma mark - Properties
 - (void)showAtIndex:(NSInteger)index {
-    if (self.pagingScrollView)
+    if (self.pagingScrollView) {
         [self.pagingScrollView showAtIndex:index];
+    }
 }
 
 
@@ -695,6 +696,11 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)didPhotoScroll:(id)photoScrollView scrollToIndex:(NSUInteger)index {
     _currentPageIndex = index;
     if (index < self.photoCaptions.count) {
+        if ([[self.photoCaptions objectAtIndex:index] length] == 0)
+            _captionView.hidden = YES;
+        else
+            _captionView.hidden = NO;
+
         _captionLabel.text = [self.photoCaptions objectAtIndex:index];
     }
     
