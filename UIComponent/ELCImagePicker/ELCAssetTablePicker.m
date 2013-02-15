@@ -40,10 +40,10 @@
 	[self.tableView performSelector:@selector(reloadData) withObject:nil afterDelay:.5];
     
     if (!self.progressHUD) {
-        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
         self.progressHUD.minSize = CGSizeMake(120, 120);
         self.progressHUD.minShowTime = 1;
-        [self.view addSubview:self.progressHUD];
+        [self.navigationController.view addSubview:self.progressHUD];
     }
 }
 

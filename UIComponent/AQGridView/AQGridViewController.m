@@ -61,11 +61,11 @@
     [self _sharedGridViewDefaultSetup];
 }
 
-- (void) awakeFromNib
-{
-    [self _sharedGridViewDefaultSetup];
-}
-
+//- (void) awakeFromNib
+//{
+//    [self _sharedGridViewDefaultSetup];
+//}
+//
 - (void) viewDidLoad
 {
 	[super viewDidLoad];
