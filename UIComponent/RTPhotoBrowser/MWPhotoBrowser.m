@@ -727,6 +727,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         if (self.photoUrls.count <= _currentPageIndex)
             startIndex = self.photoUrls.count-1;
     }
+    [self.photoCaptions removeObjectAtIndex:_currentPageIndex];
     
     if (startIndex < 0)
         return;
