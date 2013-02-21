@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		578170E616D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 578170E016D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.h */; };
+		578170E716D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 578170E116D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.m */; };
+		578170E816D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 578170E216D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.h */; };
+		578170E916D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 578170E316D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m */; };
+		578170EA16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 578170E416D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h */; };
+		578170EB16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 578170E516D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m */; };
 		57A20F3A16784CBC00FADD75 /* IndexScrollController.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EEE16784CBC00FADD75 /* IndexScrollController.h */; };
 		57A20F3B16784CBC00FADD75 /* IndexScrollController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20EEF16784CBC00FADD75 /* IndexScrollController.m */; };
 		57A20F3C16784CBC00FADD75 /* IndexScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EF016784CBC00FADD75 /* IndexScrollView.h */; };
@@ -109,6 +115,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		578170E016D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+LegacyRotation.h"; sourceTree = "<group>"; };
+		578170E116D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+LegacyRotation.m"; sourceTree = "<group>"; };
+		578170E216D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+LegacyRotation.h"; sourceTree = "<group>"; };
+		578170E316D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+LegacyRotation.m"; sourceTree = "<group>"; };
+		578170E416D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LegacyRotation.h"; sourceTree = "<group>"; };
+		578170E516D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LegacyRotation.m"; sourceTree = "<group>"; };
 		57A20EEE16784CBC00FADD75 /* IndexScrollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexScrollController.h; sourceTree = "<group>"; };
 		57A20EEF16784CBC00FADD75 /* IndexScrollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexScrollController.m; sourceTree = "<group>"; };
 		57A20EF016784CBC00FADD75 /* IndexScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexScrollView.h; sourceTree = "<group>"; };
@@ -236,8 +248,23 @@
 		5731D45415AE9189000AEB1D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				578170DF16D5C9AF00FA6E45 /* ios6Rotation */,
+				57A20F1416784CBC00FADD75 /* UIImage */,
 			);
 			name = Category;
+			sourceTree = "<group>";
+		};
+		578170DF16D5C9AF00FA6E45 /* ios6Rotation */ = {
+			isa = PBXGroup;
+			children = (
+				578170E016D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.h */,
+				578170E116D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.m */,
+				578170E216D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.h */,
+				578170E316D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m */,
+				578170E416D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h */,
+				578170E516D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m */,
+			);
+			path = ios6Rotation;
 			sourceTree = "<group>";
 		};
 		5787C90415AABDBA001DC499 /* UIComponent */ = {
@@ -257,7 +284,6 @@
 				57A20F0216784CBC00FADD75 /* PopoverController */,
 				57A20F0C16784CBC00FADD75 /* WebImageView */,
 				57A20F0F16784CBC00FADD75 /* UIViewScreenShot */,
-				57A20F1416784CBC00FADD75 /* UIImage */,
 				57A20F1B16784CBC00FADD75 /* CustomBadge */,
 				57A20F1E16784CBC00FADD75 /* AQGridView */,
 				57A20F3616784CBC00FADD75 /* EGOTableViewPullRefresh */,
@@ -631,6 +657,9 @@
 				57B0C4E516C0ECA4003B2AA9 /* ELCAssetTablePicker.h in Headers */,
 				57B0C4E716C0ECA4003B2AA9 /* ELCImagePickerController.h in Headers */,
 				ABE6D0D616C3DDB100448EFD /* NumberKeypadDecimalPoint.h in Headers */,
+				578170E616D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.h in Headers */,
+				578170E816D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.h in Headers */,
+				578170EA16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,6 +761,9 @@
 				57B0C4E616C0ECA4003B2AA9 /* ELCAssetTablePicker.m in Sources */,
 				57B0C4E816C0ECA4003B2AA9 /* ELCImagePickerController.m in Sources */,
 				ABE6D0D716C3DDB100448EFD /* NumberKeypadDecimalPoint.m in Sources */,
+				578170E716D5C9AF00FA6E45 /* UINavigationController+LegacyRotation.m in Sources */,
+				578170E916D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m in Sources */,
+				578170EB16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,7 +41,9 @@
 #import "UIImage+Alpha.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
-
+#import "UINavigationController+LegacyRotation.h"
+#import "UITabBarController+LegacyRotation.h"
+#import "UIViewController+LegacyRotation.h"
 
 #ifdef DEBUG
 #	define DLog(fmt, ...) NSLog((@"%s #%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
