@@ -48,16 +48,13 @@
     if (self.masked)
         return;
     
+    if([(ELCAssetTablePicker*)self.parent totalSelectedAssets] >= 30) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Maximum support 30 photos", nil) message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+		[alert show];
+		[alert release];
+    }
+
 	overlayView.hidden = !overlayView.hidden;
-    
-//    if([(ELCAssetTablePicker*)self.parent totalSelectedAssets] >= 10) {
-//        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Maximum Reached" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-//		[alert show];
-//		[alert release];	
-//
-//        [(ELCAssetTablePicker*)self.parent doneAction:nil];
-//    }
 }
 
 -(BOOL)selected {
