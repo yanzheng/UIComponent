@@ -135,6 +135,8 @@
 #pragma mark - ScrollView Delegates
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    scrollView.contentSize = CGSizeMake(scrollView.contentSize.width, scrollView.frame.size.height);
+
     if (self.rotating)
         return;
 }
