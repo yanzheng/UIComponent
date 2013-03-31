@@ -50,7 +50,7 @@
 -(void)preparePhotos {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-    [self.assetGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
+    [self.assetGroup enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
      {         
          if(result == nil) 
          {
@@ -67,6 +67,7 @@
     
     // enable done button when load finish
     self.navigationItem.rightBarButtonItem.enabled = YES;
+//    self.elcAssets = [[[self.elcAssets reverseObjectEnumerator] allObjects] mutableCopy];
     
 	[self.tableView reloadData];    
     
