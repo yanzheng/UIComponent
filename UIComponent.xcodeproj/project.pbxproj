@@ -248,6 +248,7 @@
 		5731D45415AE9189000AEB1D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				57A20F0F16784CBC00FADD75 /* UIViewScreenShot */,
 				578170DF16D5C9AF00FA6E45 /* ios6Rotation */,
 				57A20F1416784CBC00FADD75 /* UIImage */,
 			);
@@ -283,7 +284,6 @@
 				57A20EFF16784CBC00FADD75 /* MBProgressHUD */,
 				57A20F0216784CBC00FADD75 /* PopoverController */,
 				57A20F0C16784CBC00FADD75 /* WebImageView */,
-				57A20F0F16784CBC00FADD75 /* UIViewScreenShot */,
 				57A20F1B16784CBC00FADD75 /* CustomBadge */,
 				57A20F1E16784CBC00FADD75 /* AQGridView */,
 				57A20F3616784CBC00FADD75 /* EGOTableViewPullRefresh */,
