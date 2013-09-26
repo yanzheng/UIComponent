@@ -156,7 +156,8 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)viewDidLoad {
 	// View
 	self.view.backgroundColor = [UIColor blackColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        self.automaticallyAdjustsScrollViewInsets = NO; 
 
     // Setup paging scrolling view
 	CGRect pagingScrollViewFrame = self.view.bounds;

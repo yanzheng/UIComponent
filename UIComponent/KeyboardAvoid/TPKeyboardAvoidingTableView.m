@@ -76,7 +76,7 @@
 
 - (void)keyboardWillShow:(NSNotification*)notification {
     _keyboardRect = [[[notification userInfo] objectForKey:_UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    _keyboardRect.size.height = 216.0f;
+//    _keyboardRect.size.height = 216.0f;
     _keyboardVisible = YES;
     
     UIView *firstResponder = [self findFirstResponderBeneathView:self];
@@ -98,7 +98,7 @@
                                        [self idealOffsetForView:firstResponder withSpace:[self keyboardRect].origin.y - self.bounds.origin.y])
                   animated:YES];
     [self setScrollIndicatorInsets:self.contentInset];
-    
+
     [UIView commitAnimations];
 }
 
@@ -208,6 +208,8 @@
     UIEdgeInsets newInset = self.contentInset;
     CGRect keyboardRect = [self keyboardRect];
     newInset.bottom = keyboardRect.size.height - ((keyboardRect.origin.y+keyboardRect.size.height) - (self.bounds.origin.y+self.bounds.size.height));
+    newInset.bottom = [UIScreen mainScreen].bounds.size.height < 500 ? 210 : newInset.bottom;
+    
     return newInset;
 }
 
