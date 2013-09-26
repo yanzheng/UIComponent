@@ -13,7 +13,6 @@
 #import "RTPhotoScrollView.h"
 #import "MWPhotoBrowser.h"
 #import "RTPhoto.h"
-#import "IndexScrollController.h"
 #import "JWFolders.h"
 
 #import "MBProgressHUD.h"
@@ -22,11 +21,9 @@
 #import "WEPopoverContainerView.h"
 #import "WEPopoverController.h"
 
-#import "WebImageView.h"
 #import "CustomBadge.h"
 
 #import "RTPopupSheet.h"
-#import "AFKPageFlipper.h"
 #import "PlaceHolderTextView.h"
 #import "RTDatePickerButton.h"
 #import "TPKeyboardAvoidingTableView.h"

@@ -156,7 +156,8 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)viewDidLoad {
 	// View
 	self.view.backgroundColor = [UIColor blackColor];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     // Setup paging scrolling view
 	CGRect pagingScrollViewFrame = self.view.bounds;
 	self.pagingScrollView = [[RTPhotoScrollView alloc] initWithFrame:pagingScrollViewFrame];
@@ -634,7 +635,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 #pragma mark - Misc
 
 - (void)doneButtonPressed:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - MBProgressHUD

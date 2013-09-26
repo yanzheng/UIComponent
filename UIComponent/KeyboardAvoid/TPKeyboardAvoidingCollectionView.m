@@ -1,17 +1,16 @@
 //
-//  TPKeyboardAvoidingTableView.m
+//  TPKeyboardAvoidingCollectionView.m
 //
-//  Created by Michael Tyson on 11/04/2011.
-//  Copyright 2011 A Tasty Pixel. All rights reserved.
+//  Created by Tony Arnold on 4/08/2013.
+//  Copyright 2013 The CocoaBots. All rights reserved.
 //
 
-#import "TPKeyboardAvoidingTableView.h"
+#import "TPKeyboardAvoidingCollectionView.h"
 
 #define _UIKeyboardFrameEndUserInfoKey (&UIKeyboardFrameEndUserInfoKey != NULL ? UIKeyboardFrameEndUserInfoKey : @"UIKeyboardBoundsUserInfoKey")
 
-@interface TPKeyboardAvoidingTableView () <UITextFieldDelegate, UITextViewDelegate> {
+@interface TPKeyboardAvoidingCollectionView () <UITextFieldDelegate, UITextViewDelegate> {
     UIEdgeInsets    _priorInset;
-    UIEdgeInsets    _priorScrollIndicatorInsets;
     BOOL            _keyboardVisible;
     CGRect          _keyboardRect;
 }
@@ -21,7 +20,7 @@
 - (CGRect)keyboardRect;
 @end
 
-@implementation TPKeyboardAvoidingTableView
+@implementation TPKeyboardAvoidingCollectionView
 
 #pragma mark - Setup/Teardown
 
@@ -36,8 +35,8 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame style:(UITableViewStyle)withStyle {
-    if ( !(self = [super initWithFrame:frame style:withStyle]) ) return nil;
+- (id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
+    if ( !(self = [super initWithFrame:frame collectionViewLayout:layout]) ) return nil;
     [self setup];
     return self;
 }
@@ -76,42 +75,40 @@
 
 - (void)keyboardWillShow:(NSNotification*)notification {
     _keyboardRect = [[[notification userInfo] objectForKey:_UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    _keyboardRect.size.height = 216.0f;
     _keyboardVisible = YES;
-    
+
     UIView *firstResponder = [self findFirstResponderBeneathView:self];
     if ( !firstResponder ) {
         // No child view is the first responder - nothing to do here
         return;
     }
-    
+
     _priorInset = self.contentInset;
-    _priorScrollIndicatorInsets = self.scrollIndicatorInsets;
-    
+
     // Shrink view's inset by the keyboard's height, and scroll to show the text field/view being edited
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
-    
+
     self.contentInset = [self contentInsetForKeyboard];
     [self setContentOffset:CGPointMake(self.contentOffset.x,
                                        [self idealOffsetForView:firstResponder withSpace:[self keyboardRect].origin.y - self.bounds.origin.y])
                   animated:YES];
     [self setScrollIndicatorInsets:self.contentInset];
-    
+
     [UIView commitAnimations];
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification {
     _keyboardRect = CGRectZero;
     _keyboardVisible = NO;
-    
+
     // Restore dimensions to prior size
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
     self.contentInset = _priorInset;
-    self.scrollIndicatorInsets = _priorScrollIndicatorInsets;
+    [self setScrollIndicatorInsets:self.contentInset];
     [UIView commitAnimations];
 }
 
@@ -142,26 +139,26 @@
     if ( !firstResponder ) {
         return NO;
     }
-    
+
     CGFloat minY = CGFLOAT_MAX;
     UIView *view = nil;
     [self findTextFieldAfterTextField:firstResponder beneathView:self minY:&minY foundView:&view];
-    
+
     if ( view ) {
         [view becomeFirstResponder];
         return YES;
     }
-    
+
     return NO;
 }
 
 -(void)scrollToActiveTextField {
     if ( !_keyboardVisible ) return;
-    
+
     CGFloat visibleSpace = self.bounds.size.height - self.contentInset.top - self.contentInset.bottom;
-    
+
     CGPoint idealOffset = CGPointMake(0, [self idealOffsetForView:[self findFirstResponderBeneathView:self] withSpace:visibleSpace]);
-    
+
     [self setContentOffset:idealOffset animated:YES];
 }
 
@@ -212,14 +209,14 @@
 }
 
 -(CGFloat)idealOffsetForView:(UIView *)view withSpace:(CGFloat)space {
-    
+
     // Convert the rect to get the view's distance from the top of the scrollView.
     CGRect rect = [view convertRect:view.bounds toView:self];
-    
+
     // Set starting offset to that point
     CGFloat offset = rect.origin.y;
-    
-    
+
+
     if ( self.contentSize.height - offset < space ) {
         // Scroll to the bottom
         offset = self.contentSize.height - space;
@@ -233,9 +230,9 @@
             offset = self.contentSize.height - space;
         }
     }
-    
+
     if (offset < 0) offset = 0;
-    
+
     return offset;
 }
 
@@ -251,12 +248,12 @@
 - (void)initializeView:(UIView*)view {
     if ( ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) && (![(id)view delegate] || [(id)view delegate] == self) ) {
         [(id)view setDelegate:self];
-        
+
         if ( [view isKindOfClass:[UITextField class]] ) {
             UIView *otherView = nil;
             CGFloat minY = CGFLOAT_MAX;
             [self findTextFieldAfterTextField:view beneathView:self minY:&minY foundView:&otherView];
-            
+
             if ( otherView ) {
                 ((UITextField*)view).returnKeyType = UIReturnKeyNext;
             } else {

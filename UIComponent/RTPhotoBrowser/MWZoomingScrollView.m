@@ -66,14 +66,17 @@
     [_photo unloadImage];
     
     self.photoImageview = nil;
-    self.photo = nil;
+    if (_photo)
+        [_photo release];
 	[super dealloc];
 }
 
 - (void)setPhoto:(RTPhoto *)photo {
-    _photoImageView.image = nil; // Release image
+    if (_photoImageView)
+        _photoImageView.image = nil; // Release image
     if (_photo != photo) {
-        [_photo release];
+        if (_photo)
+            [_photo release];
         _photo = [photo retain];
     }
     if (_photo)

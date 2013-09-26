@@ -7,7 +7,6 @@
 //
 
 #import "RTPhoto.h"
-#import "RTApiProxy.h"
 
 @implementation RTPhoto
 @synthesize image = _image;
@@ -16,7 +15,7 @@
 @synthesize caption = _caption;
 
 - (void) dealloc {
-    [[RTApiRequestProxy sharedInstance] cancelRequestsWithTarget:self];
+//    [[RTApiRequestProxy sharedInstance] cancelRequestsWithTarget:self];
     self.image = nil;
     self.photoURL = nil;
     
@@ -61,43 +60,27 @@
 }
 
 - (void)loadImage {
-    if (_image)
+    if (self.image)
         return;
     
     if (_photoPath) {
-        _image = [UIImage imageWithContentsOfFile:_photoPath];
+        self.image = [UIImage imageWithContentsOfFile:_photoPath];
         return;
     }
     
     if (_photoURL)
-        [[RTApiRequestProxy sharedInstance] fetchImage:_photoURL target:self action:@selector(onFetchImage:)];
+        return;
     
 //    NSLog(@"load image: %@", _photoURL);
 }
 
 - (void)unloadImage {
-    [[RTApiRequestProxy sharedInstance] cancelRequestsWithTarget:self];
+    return;
+//    [[RTApiRequestProxy sharedInstance] cancelRequestsWithTarget:self];
     
     if (_image)
         _image = nil;
 }
 
-- (void)onFetchImage:(RTNetworkResponse *)response {
-    // network error
-    if ([response status] != RTNetworkResponseStatusSuccess) {
-        NSLog(@"RTNetwork error");
-        return;
-    }
-    
-    id status = [[response content] objectForKey:@"status"];
-    if (status && [[(NSString *)status uppercaseString] isEqualToString:@"OK"]) {
-        _photoPath = [[response content] objectForKey:@"imagePath"];
-        self.image = [UIImage imageWithContentsOfFile:_photoPath];
-        
-//        NSLog(@"fetch image success: %@", _photoURL);
-        [[NSNotificationCenter defaultCenter] postNotificationName:RTPHOTO_LOADING_DID_END_NOTIFICATION
-                                                            object:self];
-    }
-}
 
 @end

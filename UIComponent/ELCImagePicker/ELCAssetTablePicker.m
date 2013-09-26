@@ -1,7 +1,7 @@
 //
 //  AssetTablePicker.m
 //
-//  Created by Matt Tuzzolo on 2/15/11.
+//  Created by ELC on 2/15/11.
 //  Copyright 2011 ELC Technologies. All rights reserved.
 //
 
@@ -11,28 +11,37 @@
 #import "ELCAlbumPickerController.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface ELCAssetTablePicker ()
+
+@property (nonatomic, assign) int columns;
+
+@end
+
 @implementation ELCAssetTablePicker
 
-@synthesize parent;
-@synthesize assetGroup, elcAssets;
-@synthesize progressHUD;
-@synthesize excludedAssetURLList;
+@synthesize parent = _parent;;
+@synthesize selectedAssetsLabel = _selectedAssetsLabel;
+@synthesize assetGroup = _assetGroup;
+@synthesize elcAssets = _elcAssets;
+@synthesize singleSelection = _singleSelection;
+@synthesize columns = _columns;
 
--(void)viewDidLoad {
-        
-	[self.tableView setSeparatorColor:[UIColor clearColor]];
+- (void)viewDidLoad
+{
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[self.tableView setAllowsSelection:NO];
 
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     self.elcAssets = tempArray;
     [tempArray release];
 	
-	UIBarButtonItem *doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
-	[self.navigationItem setRightBarButtonItem:doneButtonItem];
-	[self.navigationItem setTitle:NSLocalizedString(@"Pick Photos", nil)];
-    
-    // disable done button when loading photos
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    if (self.immediateReturn) {
+        
+    } else {
+        UIBarButtonItem *doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
+        [self.navigationItem setRightBarButtonItem:doneButtonItem];
+        [self.navigationItem setTitle:NSLocalizedString(@"Pick Photos", nil)];
+    }
 
 	[self performSelectorInBackground:@selector(preparePhotos) withObject:nil];
     
@@ -47,118 +56,143 @@
     }
 }
 
--(void)preparePhotos {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    [self.assetGroup enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
-     {         
-         if(result == nil) 
-         {
-             return;
-         }
-         
-         ELCAsset *elcAsset = [[[ELCAsset alloc] initWithAsset:result] autorelease];
-         if ([self.excludedAssetURLList containsObject:elcAsset.asset.defaultRepresentation.url])
-             [elcAsset setMasked:YES];
-         
-         [elcAsset setParent:self];
-         [self.elcAssets addObject:elcAsset];
-     }];
-    
-    // enable done button when load finish
-    self.navigationItem.rightBarButtonItem.enabled = YES;
-//    self.elcAssets = [[[self.elcAssets reverseObjectEnumerator] allObjects] mutableCopy];
-    
-	[self.tableView reloadData];    
-    
-    [pool release];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.columns = self.view.bounds.size.width / 80;
 }
 
-- (void)doneAction:(id)sender {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.columns = self.view.bounds.size.width / 80;
+    [self.tableView reloadData];
+}
+
+- (void)preparePhotos
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    NSLog(@"enumerating photos");
+    [self.assetGroup enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+     
+        if(result == nil) {
+            return;
+        }
+
+        ELCAsset *elcAsset = [[ELCAsset alloc] initWithAsset:result];
+        if ([self.excludedAssetURLList containsObject:elcAsset.asset.defaultRepresentation.url])
+            [elcAsset setMasked:YES];
+        [elcAsset setParent:self];
+        
+        BOOL isAssetFiltered = NO;
+        if (self.assetPickerFilterDelegate &&
+           [self.assetPickerFilterDelegate respondsToSelector:@selector(assetTablePicker:isAssetFilteredOut:)])
+        {
+	        isAssetFiltered = [self.assetPickerFilterDelegate assetTablePicker:self isAssetFilteredOut:(ELCAsset*)elcAsset];
+        }
+
+        if (!isAssetFiltered) {
+	        [self.elcAssets addObject:elcAsset];
+        }
+        
+        [elcAsset release];
+     }];
+//    NSLog(@"done enumerating photos");
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+//        // scroll to bottom
+//        long section = [self numberOfSectionsInTableView:self.tableView] - 1;
+//        long row = [self tableView:self.tableView numberOfRowsInSection:section] - 1;
+//        if (section >= 0 && row >= 0) {
+//            NSIndexPath *ip = [NSIndexPath indexPathForRow:row
+//                                                 inSection:section];
+//            [self.tableView scrollToRowAtIndexPath:ip
+//                                  atScrollPosition:UITableViewScrollPositionBottom
+//                                          animated:NO];
+//        }
+        
+        [self.navigationItem setTitle:self.singleSelection ? NSLocalizedString(@"Pick Photo", nil) : NSLocalizedString(@"Pick Photos", nil)];
+    });
+    
+    [pool release];
+
+}
+
+- (void)doneAction:(id)sender
+{
     self.progressHUD.labelText = NSLocalizedString(@"Loading...", nil);
     self.progressHUD.mode = MBProgressHUDModeIndeterminate;
     [self.progressHUD show:YES];
+    
 
-    [self performSelector:@selector(handlePhotos) withObject:nil afterDelay:0];
+	NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
+	    
+	for(ELCAsset *elcAsset in self.elcAssets) {
+
+		if([elcAsset selected]) {
+			
+			[selectedAssetsImages addObject:[elcAsset asset]];
+		}
+	}
+        
+    [self.parent selectedAssets:selectedAssetsImages];
 }
 
-- (void)handlePhotos {
-    NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
-    for(ELCAsset *elcAsset in self.elcAssets)
-    {
-        if([elcAsset selected]) {
-            
-            [selectedAssetsImages addObject:[elcAsset asset]];
+- (void)assetSelected:(id)asset
+{
+    if (self.singleSelection) {
+
+        for(ELCAsset *elcAsset in self.elcAssets) {
+            if(asset != elcAsset) {
+                elcAsset.selected = NO;
+            }
         }
     }
-    
-    [(ELCAlbumPickerController*)self.parent selectedAssets:selectedAssetsImages];
+    if (self.immediateReturn) {
+        NSArray *singleAssetArray = [NSArray arrayWithObject:[asset asset]];
+        [(NSObject *)self.parent performSelector:@selector(selectedAssets:) withObject:singleAssetArray afterDelay:0];
+    }
 }
 
 #pragma mark UITableViewDataSource Delegate Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     // Return the number of sections.
     return 1;
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ceil([self.assetGroup numberOfAssets] / 4.0);
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return ceil([self.elcAssets count] / (float)self.columns);
 }
 
-- (NSArray*)assetsForIndexPath:(NSIndexPath*)_indexPath {
-    
-	int index = (_indexPath.row*4);
-	int maxIndex = (_indexPath.row*4+3);
-    
-	// NSLog(@"Getting assets for %d to %d with array count %d", index, maxIndex, [assets count]);
-    
-	if(maxIndex < [self.elcAssets count]) {
-        
-		return [NSArray arrayWithObjects:[self.elcAssets objectAtIndex:index],
-				[self.elcAssets objectAtIndex:index+1],
-				[self.elcAssets objectAtIndex:index+2],
-				[self.elcAssets objectAtIndex:index+3],
-				nil];
-	}
-    
-	else if(maxIndex-1 < [self.elcAssets count]) {
-        
-		return [NSArray arrayWithObjects:[self.elcAssets objectAtIndex:index],
-				[self.elcAssets objectAtIndex:index+1],
-				[self.elcAssets objectAtIndex:index+2],
-				nil];
-	}
-    
-	else if(maxIndex-2 < [self.elcAssets count]) {
-        
-		return [NSArray arrayWithObjects:[self.elcAssets objectAtIndex:index],
-				[self.elcAssets objectAtIndex:index+1],
-				nil];
-	}
-    
-	else if(maxIndex-3 < [self.elcAssets count]) {
-        
-		return [NSArray arrayWithObject:[self.elcAssets objectAtIndex:index]];
-	}
-    
-	return nil;
+- (NSArray *)assetsForIndexPath:(NSIndexPath *)path
+{
+    long index = path.row * self.columns;
+    long length = MIN(self.columns, [self.elcAssets count] - index);
+    return [self.elcAssets subarrayWithRange:NSMakeRange(index, length)];
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{    
     static NSString *CellIdentifier = @"Cell";
         
     ELCAssetCell *cell = (ELCAssetCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    if (cell == nil) 
-    {		        
+    if (cell == nil) {		        
         cell = [[[ELCAssetCell alloc] initWithAssets:[self assetsForIndexPath:indexPath] reuseIdentifier:CellIdentifier] autorelease];
-    }	
-	else 
-    {		
+
+    } else {		
 		[cell setAssets:[self assetsForIndexPath:indexPath]];
 	}
     
@@ -174,10 +208,8 @@
     
     int count = 0;
     
-    for(ELCAsset *asset in self.elcAssets) 
-    {
-		if([asset selected]) 
-        {            
+    for(ELCAsset *asset in self.elcAssets) {
+		if([asset selected]) {   
             count++;	
 		}
 	}
@@ -189,9 +221,11 @@
 {
     self.progressHUD = nil;
     self.excludedAssetURLList = nil;
-    
-    [elcAssets release];
-    [super dealloc];
+
+    [_assetGroup release];
+    [_elcAssets release];
+    [_selectedAssetsLabel release];
+    [super dealloc];    
 }
 
 @end

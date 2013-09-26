@@ -13,10 +13,6 @@
 		578170E916D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 578170E316D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m */; };
 		578170EA16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 578170E416D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h */; };
 		578170EB16D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 578170E516D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m */; };
-		57A20F3A16784CBC00FADD75 /* IndexScrollController.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EEE16784CBC00FADD75 /* IndexScrollController.h */; };
-		57A20F3B16784CBC00FADD75 /* IndexScrollController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20EEF16784CBC00FADD75 /* IndexScrollController.m */; };
-		57A20F3C16784CBC00FADD75 /* IndexScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EF016784CBC00FADD75 /* IndexScrollView.h */; };
-		57A20F3D16784CBC00FADD75 /* IndexScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20EF116784CBC00FADD75 /* IndexScrollView.m */; };
 		57A20F3E16784CBC00FADD75 /* MWPhotoBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EF316784CBC00FADD75 /* MWPhotoBrowser.h */; };
 		57A20F3F16784CBC00FADD75 /* MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20EF416784CBC00FADD75 /* MWPhotoBrowser.m */; };
 		57A20F4016784CBC00FADD75 /* MWTapDetectingImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20EF516784CBC00FADD75 /* MWTapDetectingImageView.h */; };
@@ -40,8 +36,6 @@
 		57A20F5216784CBC00FADD75 /* WEPopoverParentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F0916784CBC00FADD75 /* WEPopoverParentView.h */; };
 		57A20F5316784CBC00FADD75 /* WETouchableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F0A16784CBC00FADD75 /* WETouchableView.h */; };
 		57A20F5416784CBC00FADD75 /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F0B16784CBC00FADD75 /* WETouchableView.m */; };
-		57A20F5516784CBC00FADD75 /* WebImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F0D16784CBC00FADD75 /* WebImageView.h */; };
-		57A20F5616784CBC00FADD75 /* WebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F0E16784CBC00FADD75 /* WebImageView.m */; };
 		57A20F5716784CBC00FADD75 /* UIScreen+Scale.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F1016784CBC00FADD75 /* UIScreen+Scale.h */; };
 		57A20F5816784CBC00FADD75 /* UIScreen+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F1116784CBC00FADD75 /* UIScreen+Scale.m */; };
 		57A20F5916784CBC00FADD75 /* UIView+Screenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F1216784CBC00FADD75 /* UIView+Screenshot.h */; };
@@ -91,8 +85,6 @@
 		57A20FAA16784FF900FADD75 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F9516784FF900FADD75 /* RateView.m */; };
 		57A20FAB16784FF900FADD75 /* RTDatePickerButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F9716784FF900FADD75 /* RTDatePickerButton.h */; };
 		57A20FAC16784FF900FADD75 /* RTDatePickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F9816784FF900FADD75 /* RTDatePickerButton.m */; };
-		57A20FAD16784FF900FADD75 /* AFKPageFlipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F9A16784FF900FADD75 /* AFKPageFlipper.h */; };
-		57A20FAE16784FF900FADD75 /* AFKPageFlipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F9B16784FF900FADD75 /* AFKPageFlipper.m */; };
 		57A20FAF16784FF900FADD75 /* RTPopupSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F9D16784FF900FADD75 /* RTPopupSheet.h */; };
 		57A20FB016784FF900FADD75 /* RTPopupSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A20F9E16784FF900FADD75 /* RTPopupSheet.m */; };
 		57A20FB116784FF900FADD75 /* SNPopupView+UsingPrivateMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A20F9F16784FF900FADD75 /* SNPopupView+UsingPrivateMethod.h */; };
@@ -121,10 +113,6 @@
 		578170E316D5C9AF00FA6E45 /* UITabBarController+LegacyRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+LegacyRotation.m"; sourceTree = "<group>"; };
 		578170E416D5C9AF00FA6E45 /* UIViewController+LegacyRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LegacyRotation.h"; sourceTree = "<group>"; };
 		578170E516D5C9AF00FA6E45 /* UIViewController+LegacyRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LegacyRotation.m"; sourceTree = "<group>"; };
-		57A20EEE16784CBC00FADD75 /* IndexScrollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexScrollController.h; sourceTree = "<group>"; };
-		57A20EEF16784CBC00FADD75 /* IndexScrollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexScrollController.m; sourceTree = "<group>"; };
-		57A20EF016784CBC00FADD75 /* IndexScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexScrollView.h; sourceTree = "<group>"; };
-		57A20EF116784CBC00FADD75 /* IndexScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexScrollView.m; sourceTree = "<group>"; };
 		57A20EF316784CBC00FADD75 /* MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowser.h; sourceTree = "<group>"; };
 		57A20EF416784CBC00FADD75 /* MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhotoBrowser.m; sourceTree = "<group>"; };
 		57A20EF516784CBC00FADD75 /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingImageView.h; sourceTree = "<group>"; };
@@ -148,8 +136,6 @@
 		57A20F0916784CBC00FADD75 /* WEPopoverParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverParentView.h; sourceTree = "<group>"; };
 		57A20F0A16784CBC00FADD75 /* WETouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WETouchableView.h; sourceTree = "<group>"; };
 		57A20F0B16784CBC00FADD75 /* WETouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WETouchableView.m; sourceTree = "<group>"; };
-		57A20F0D16784CBC00FADD75 /* WebImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebImageView.h; sourceTree = "<group>"; };
-		57A20F0E16784CBC00FADD75 /* WebImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebImageView.m; sourceTree = "<group>"; };
 		57A20F1016784CBC00FADD75 /* UIScreen+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+Scale.h"; sourceTree = "<group>"; };
 		57A20F1116784CBC00FADD75 /* UIScreen+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+Scale.m"; sourceTree = "<group>"; };
 		57A20F1216784CBC00FADD75 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
@@ -207,8 +193,6 @@
 		57A20F9516784FF900FADD75 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 		57A20F9716784FF900FADD75 /* RTDatePickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTDatePickerButton.h; sourceTree = "<group>"; };
 		57A20F9816784FF900FADD75 /* RTDatePickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTDatePickerButton.m; sourceTree = "<group>"; };
-		57A20F9A16784FF900FADD75 /* AFKPageFlipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFKPageFlipper.h; sourceTree = "<group>"; };
-		57A20F9B16784FF900FADD75 /* AFKPageFlipper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFKPageFlipper.m; sourceTree = "<group>"; };
 		57A20F9D16784FF900FADD75 /* RTPopupSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTPopupSheet.h; sourceTree = "<group>"; };
 		57A20F9E16784FF900FADD75 /* RTPopupSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTPopupSheet.m; sourceTree = "<group>"; };
 		57A20F9F16784FF900FADD75 /* SNPopupView+UsingPrivateMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SNPopupView+UsingPrivateMethod.h"; sourceTree = "<group>"; };
@@ -277,30 +261,16 @@
 				57A20F9016784FF900FADD75 /* TextViewPlaceHolder */,
 				57A20F9316784FF900FADD75 /* RateView */,
 				57A20F9616784FF900FADD75 /* DatePickerButton */,
-				57A20F9916784FF900FADD75 /* AFKPageFlipper */,
 				57A20F9C16784FF900FADD75 /* PopupSheet */,
-				57A20EED16784CBC00FADD75 /* IndexScrollController */,
 				57A20EF216784CBC00FADD75 /* RTPhotoBrowser */,
 				57A20EFF16784CBC00FADD75 /* MBProgressHUD */,
 				57A20F0216784CBC00FADD75 /* PopoverController */,
-				57A20F0C16784CBC00FADD75 /* WebImageView */,
 				57A20F1B16784CBC00FADD75 /* CustomBadge */,
 				57A20F1E16784CBC00FADD75 /* AQGridView */,
 				57A20F3616784CBC00FADD75 /* EGOTableViewPullRefresh */,
 				57A20F3716784CBC00FADD75 /* JWFolders */,
 			);
 			name = UIComponent;
-			sourceTree = "<group>";
-		};
-		57A20EED16784CBC00FADD75 /* IndexScrollController */ = {
-			isa = PBXGroup;
-			children = (
-				57A20EEE16784CBC00FADD75 /* IndexScrollController.h */,
-				57A20EEF16784CBC00FADD75 /* IndexScrollController.m */,
-				57A20EF016784CBC00FADD75 /* IndexScrollView.h */,
-				57A20EF116784CBC00FADD75 /* IndexScrollView.m */,
-			);
-			path = IndexScrollController;
 			sourceTree = "<group>";
 		};
 		57A20EF216784CBC00FADD75 /* RTPhotoBrowser */ = {
@@ -345,15 +315,6 @@
 				57A20F0B16784CBC00FADD75 /* WETouchableView.m */,
 			);
 			path = PopoverController;
-			sourceTree = "<group>";
-		};
-		57A20F0C16784CBC00FADD75 /* WebImageView */ = {
-			isa = PBXGroup;
-			children = (
-				57A20F0D16784CBC00FADD75 /* WebImageView.h */,
-				57A20F0E16784CBC00FADD75 /* WebImageView.m */,
-			);
-			path = WebImageView;
 			sourceTree = "<group>";
 		};
 		57A20F0F16784CBC00FADD75 /* UIViewScreenShot */ = {
@@ -507,15 +468,6 @@
 			path = DatePickerButton;
 			sourceTree = "<group>";
 		};
-		57A20F9916784FF900FADD75 /* AFKPageFlipper */ = {
-			isa = PBXGroup;
-			children = (
-				57A20F9A16784FF900FADD75 /* AFKPageFlipper.h */,
-				57A20F9B16784FF900FADD75 /* AFKPageFlipper.m */,
-			);
-			path = AFKPageFlipper;
-			sourceTree = "<group>";
-		};
 		57A20F9C16784FF900FADD75 /* PopupSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,8 +558,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A20F3A16784CBC00FADD75 /* IndexScrollController.h in Headers */,
-				57A20F3C16784CBC00FADD75 /* IndexScrollView.h in Headers */,
 				57A20F3E16784CBC00FADD75 /* MWPhotoBrowser.h in Headers */,
 				57A20F4016784CBC00FADD75 /* MWTapDetectingImageView.h in Headers */,
 				57A20F4216784CBC00FADD75 /* MWTapDetectingView.h in Headers */,
@@ -620,7 +570,6 @@
 				57A20F5016784CBC00FADD75 /* WEPopoverController.h in Headers */,
 				57A20F5216784CBC00FADD75 /* WEPopoverParentView.h in Headers */,
 				57A20F5316784CBC00FADD75 /* WETouchableView.h in Headers */,
-				57A20F5516784CBC00FADD75 /* WebImageView.h in Headers */,
 				57A20F5716784CBC00FADD75 /* UIScreen+Scale.h in Headers */,
 				57A20F5916784CBC00FADD75 /* UIView+Screenshot.h in Headers */,
 				57A20F5B16784CBC00FADD75 /* UIImage+Alpha.h in Headers */,
@@ -647,7 +596,6 @@
 				57A20FA716784FF900FADD75 /* PlaceHolderTextView.h in Headers */,
 				57A20FA916784FF900FADD75 /* RateView.h in Headers */,
 				57A20FAB16784FF900FADD75 /* RTDatePickerButton.h in Headers */,
-				57A20FAD16784FF900FADD75 /* AFKPageFlipper.h in Headers */,
 				57A20FAF16784FF900FADD75 /* RTPopupSheet.h in Headers */,
 				57A20FB116784FF900FADD75 /* SNPopupView+UsingPrivateMethod.h in Headers */,
 				57A20FB316784FF900FADD75 /* SNPopupView.h in Headers */,
@@ -689,7 +637,7 @@
 		57E39319159849C100F0D0FB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = anjuke;
 			};
 			buildConfigurationList = 57E3931C159849C100F0D0FB /* Build configuration list for PBXProject "UIComponent" */;
@@ -714,8 +662,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A20F3B16784CBC00FADD75 /* IndexScrollController.m in Sources */,
-				57A20F3D16784CBC00FADD75 /* IndexScrollView.m in Sources */,
 				57A20F3F16784CBC00FADD75 /* MWPhotoBrowser.m in Sources */,
 				57A20F4116784CBC00FADD75 /* MWTapDetectingImageView.m in Sources */,
 				57A20F4316784CBC00FADD75 /* MWTapDetectingView.m in Sources */,
@@ -727,7 +673,6 @@
 				57A20F4F16784CBC00FADD75 /* WEPopoverContainerView.m in Sources */,
 				57A20F5116784CBC00FADD75 /* WEPopoverController.m in Sources */,
 				57A20F5416784CBC00FADD75 /* WETouchableView.m in Sources */,
-				57A20F5616784CBC00FADD75 /* WebImageView.m in Sources */,
 				57A20F5816784CBC00FADD75 /* UIScreen+Scale.m in Sources */,
 				57A20F5A16784CBC00FADD75 /* UIView+Screenshot.m in Sources */,
 				57A20F5C16784CBC00FADD75 /* UIImage+Alpha.m in Sources */,
@@ -751,7 +696,6 @@
 				57A20FA816784FF900FADD75 /* PlaceHolderTextView.m in Sources */,
 				57A20FAA16784FF900FADD75 /* RateView.m in Sources */,
 				57A20FAC16784FF900FADD75 /* RTDatePickerButton.m in Sources */,
-				57A20FAE16784FF900FADD75 /* AFKPageFlipper.m in Sources */,
 				57A20FB016784FF900FADD75 /* RTPopupSheet.m in Sources */,
 				57A20FB216784FF900FADD75 /* SNPopupView+UsingPrivateMethod.m in Sources */,
 				57A20FB416784FF900FADD75 /* SNPopupView.m in Sources */,
@@ -774,8 +718,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -789,10 +734,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -801,16 +750,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -821,7 +774,6 @@
 		57E39330159849C100F0D0FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/UIComponent.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIComponent/UIComponent-Prefix.pch";
@@ -839,7 +791,6 @@
 		57E39331159849C100F0D0FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/UIComponent.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIComponent/UIComponent-Prefix.pch";
